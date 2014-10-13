@@ -5,6 +5,7 @@
 # Define Variables
 CUR_TIME=`date +"%A %b %e %r"`
 HOSTNAME=`hostname`
+MAIL=`admin@hostname`
 
 # Retrieve the load average of the past 1 minute
 Load_AVG=`uptime | cut -d'l' -f2 | awk '{print $3}' | cut -d. -f1`
@@ -33,7 +34,7 @@ echo "Please Check... ASAP."  >> /tmp/monitload.txt
 
 # Send an email to the administrator of the server
 /usr/bin/mutt -s "ALERT!!! High 1 minute load average\
- on '$HOSTNAME'" -a /root/ps_output log@dimapolyakov.ru <\
+ on '$HOSTNAME'" -a /root/ps_output $MAIL <\
 /tmp/monitload.txt
 
 fi
